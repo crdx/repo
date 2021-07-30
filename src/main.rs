@@ -85,7 +85,7 @@ pub struct Opts {
 
 fn main() {
     let opts = parse_opts();
-    let current_dir = env::current_dir().unwrap();
+    let base_dir = env::current_dir().unwrap();
 
     let filter = RepositoryFilter {
         dirty: opts.flag_dirty,
@@ -93,7 +93,7 @@ fn main() {
     };
 
     let repos = if atty::is(Stream::Stdin) {
-        repo::list_from_fs(&filter, &current_dir)
+        repo::list_from_fs(&filter, &base_dir)
     } else {
         let stdin = io::stdin();
         let paths = stdin
@@ -102,15 +102,12 @@ fn main() {
             .map(|line| PathBuf::from(line.unwrap()))
             .collect();
 
-        repo::list_from_vec(&filter, paths, &current_dir)
+        repo::list_from_vec(&filter, &base_dir, paths)
     };
 
     if opts.cmd_ls {
         for repo in &repos {
-            println!(
-                "{}",
-                repo.get_path(&current_dir, opts.flag_absolute).display()
-            );
+            println!("{}", repo.get_path(&base_dir, opts.flag_absolute).display());
         }
     }
 
@@ -130,7 +127,7 @@ fn main() {
                 println!(
                     "== {} ==",
                     Yellow.bold().paint(
-                        repo.get_path(&current_dir, opts.flag_absolute)
+                        repo.get_path(&base_dir, opts.flag_absolute)
                             .display()
                             .to_string()
                     )

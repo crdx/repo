@@ -38,7 +38,7 @@ impl Repository {
     }
 }
 
-pub fn list_from_vec(filter: &RepositoryFilter, paths: Vec<PathBuf>, base_dir: &Path) -> Vec<Repository> {
+pub fn list_from_vec(filter: &RepositoryFilter, base_dir: &Path, paths: Vec<PathBuf>) -> Vec<Repository> {
     let paths = paths
         .into_iter()
         .map(|path| {
