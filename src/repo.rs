@@ -4,6 +4,7 @@ use crate::fs;
 use crate::git;
 use crate::ignore::Ignorer;
 
+#[derive(Debug)]
 pub struct RepositoryFilter {
     pub dirty: bool,
     pub unpushed: bool,
