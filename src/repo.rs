@@ -63,10 +63,10 @@ fn mkrepos(filter: &RepositoryFilter, paths: Vec<PathBuf>) -> Vec<Repository> {
     paths
         .into_par_iter()
         .filter_map(|path| {
-            if !git::is_actual(&path)
+            if filter.ignorer.is_match(&path)
+                || !git::is_actual(&path)
                 || (filter.dirty && !git::is_dirty(&path))
                 || (filter.unpushed && !git::is_unpushed(&path))
-                || filter.ignorer.is_match(&path)
             {
                 None
             } else {
