@@ -2,11 +2,12 @@ use std::path::{Path, PathBuf};
 
 use crate::fs;
 use crate::git;
+use crate::ignore::Ignorer;
 
-#[derive(Debug)]
 pub struct RepositoryFilter {
     pub dirty: bool,
     pub unpushed: bool,
+    pub ignorer: Ignorer,
 }
 
 #[derive(Debug)]
@@ -65,6 +66,7 @@ fn mkrepos(filter: &RepositoryFilter, paths: Vec<PathBuf>) -> Vec<Repository> {
             if !git::is_actual(&path)
                 || (filter.dirty && !git::is_dirty(&path))
                 || (filter.unpushed && !git::is_unpushed(&path))
+                || filter.ignorer.is_match(&path)
             {
                 None
             } else {

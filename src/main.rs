@@ -16,8 +16,10 @@ use docopt::Docopt;
 use serde::Deserialize;
 use unindent::unindent;
 
+mod config;
 mod fs;
 mod git;
+mod ignore;
 mod repo;
 
 use repo::RepositoryFilter;
@@ -90,6 +92,7 @@ fn main() {
     let filter = RepositoryFilter {
         dirty: opts.flag_dirty,
         unpushed: opts.flag_unpushed,
+        ignorer: config::get_ignorer(),
     };
 
     let repos = if atty::is(Stream::Stdin) {
