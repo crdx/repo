@@ -2,6 +2,7 @@ use std::path::Path;
 
 use ignore::gitignore::{Gitignore, GitignoreBuilder};
 
+#[derive(Debug)]
 pub struct Ignorer {
     matcher: Gitignore,
 }
