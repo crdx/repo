@@ -45,7 +45,7 @@ fn usage() -> String {
         Options:
             -d, --dirty          Include only dirty repos
             -u, --unpushed       Include only unpushed repos
-            -x, --absolute       Use absolute paths
+            -x, --absolute       Show absolute paths
             -v, --verbose        Show a header for each repo when executing a command
             -i, --interactive    Pause between command executions
             --ignore-errors      Ignore errors when executing commands
