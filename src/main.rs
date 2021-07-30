@@ -3,7 +3,6 @@
 #![warn(nonstandard_style)]
 #![warn(rust_2018_idioms)]
 #![warn(clippy::all, clippy::pedantic)]
-#![allow(clippy::struct_excessive_bools)]
 
 use std::env;
 use std::io::{self, BufRead, Read};
@@ -71,6 +70,7 @@ fn pause() {
     stdin.read_exact(&mut [0_u8]).unwrap();
 }
 
+#[allow(clippy::struct_excessive_bools)]
 #[derive(Debug, Deserialize)]
 pub struct Opts {
     cmd_ls: bool,
