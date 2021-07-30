@@ -1,6 +1,6 @@
 # repo
 
-**repo** is a tool that recursively finds and manages git repositories.
+**repo** is a tool that recursively finds git repositories.
 
 ## CLI
 
