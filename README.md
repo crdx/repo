@@ -71,8 +71,9 @@ As absolute repository paths are used to match against the ignore rules the igno
 ### Example
 
 ```
-.cargo/              # Match ".cargo" as any component of path.
-**/.cargo/registry/  # Match just the "registry" subdirectory.
+.cargo/                 # Match ".cargo" as any component of path.
+**/.cargo/registry/     # Match just the "registry" subdirectory.
+**/.local/share/Trash/  # Ignore trash.
 ```
 
 ## Build
