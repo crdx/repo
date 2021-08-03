@@ -42,17 +42,24 @@ Push all repositories you've left unpushed commits in.
 repo -vu run git push
 ```
 
-Perform garbage collection and fsck all repositories.
-
-```bash
-repo -v run git gc
-repo -v run git fsck
-```
-
 Check the status of all repositories.
 
 ```bash
 repo -v run git status -sb
+```
+
+Run fsck on all repositories.
+
+```bash
+repo -v run git fsck
+```
+
+Perform garbage collection on all repositories, and show a total file count of the `.git` directories before and after.
+
+```bash
+repo run -- bash -c 'find .git/ -type f | wc -l' | paste -sd+ | bc
+repo -v run git gc
+repo run -- bash -c 'find .git/ -type f | wc -l' | paste -sd+ | bc
 ```
 
 ## Ignore patterns
