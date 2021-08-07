@@ -45,6 +45,7 @@ fn usage() -> String {
         Options:
             -d, --dirty          Include only dirty repos
             -u, --unpushed       Include only unpushed repos
+            -a, --all            Include ignored repos
             -x, --absolute       Show absolute paths
             -v, --verbose        Show a header for each repo when executing a command
             -i, --interactive    Pause between command executions
@@ -78,6 +79,7 @@ pub struct Opts {
     arg_command: Vec<String>,
     flag_dirty: bool,
     flag_unpushed: bool,
+    flag_all: bool,
     flag_absolute: bool,
     flag_verbose: bool,
     flag_interactive: bool,
@@ -92,7 +94,7 @@ fn main() {
     let filter = RepositoryFilter {
         dirty: opts.flag_dirty,
         unpushed: opts.flag_unpushed,
-        ignorer: config::get_ignorer(),
+        ignorer: config::get_ignorer(opts.flag_all),
     };
 
     let repos = if atty::is(Stream::Stdin) {

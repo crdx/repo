@@ -4,20 +4,28 @@ use ignore::gitignore::{Gitignore, GitignoreBuilder};
 
 #[derive(Debug)]
 pub struct Ignorer {
-    matcher: Gitignore,
+    matcher: Option<Gitignore>,
 }
 
 impl Ignorer {
-    pub fn new<T: AsRef<Path>>(path: T) -> Self {
+    pub fn noop() -> Self {
+        Self { matcher: None }
+    }
+
+    pub fn new(path: impl AsRef<Path>) -> Self {
         let mut builder = GitignoreBuilder::new("/");
         builder.add(path);
         let matcher = builder.build().unwrap();
-        Self { matcher }
+
+        Self {
+            matcher: Some(matcher),
+        }
     }
 
     pub fn is_match(&self, path: &Path) -> bool {
-        self.matcher
-            .matched_path_or_any_parents(path, true)
-            .is_ignore()
+        match &self.matcher {
+            Some(matcher) => matcher.matched_path_or_any_parents(path, true).is_ignore(),
+            None => false,
+        }
     }
 }
