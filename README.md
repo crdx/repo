@@ -93,7 +93,7 @@ When benchmarked the [git2](https://docs.rs/git2) crate performed worse than spa
 
 ## Bugs or contributions
 
-Open an [issue](http://github.com/crdx/repo/issues) or send a [pull request](http://github.com/crdx/repo/pulls).
+Open an [issue](https://github.com/crdx/repo/issues) or send a [pull request](https://github.com/crdx/repo/pulls).
 
 ## Licence
 
