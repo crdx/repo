@@ -55,7 +55,7 @@ fn usage() -> String {
         get_program_name().unwrap()
     );
 
-    unindent(&usage.trim())
+    unindent(usage.trim())
 }
 
 fn parse_opts() -> Opts {
@@ -130,10 +130,9 @@ fn main() {
 
         for repo in &repos {
             if opts.flag_verbose {
-                // Don't add an extra new line before the header for the
-                // first item.
-                // The enter key press from interactive mode does the
-                // job of adding the new line for us.
+                // Don't add an extra new line before the header for the first item.
+                // The enter key press from interactive mode does the job of adding the new line for
+                // us.
                 if first_iteration_done && !opts.flag_interactive {
                     println!();
                 }
