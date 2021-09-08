@@ -37,7 +37,7 @@ fn usage() -> String {
         "
         Usage:
             {0} [options] ls
-            {0} [options] run [ -- ] <command>...
+            {0} [options] run [--] <command>...
 
         Find git repository paths starting from the current directory,
         or from stdin if supplied.
