@@ -39,8 +39,8 @@ fn usage() -> String {
             {0} [options] ls
             {0} [options] run [--] <command>...
 
-        Find git repository paths starting from the current directory,
-        or from stdin if supplied.
+        Find git repository paths starting from the current directory, or from stdin if supplied.
+        Paths from stdin are always displayed as absolute paths.
 
         Options:
             -d, --dirty          Include only dirty repositories
@@ -98,10 +98,11 @@ fn main() {
         ignorer: config::get_ignorer(opts.flag_all),
     };
 
-    let repos = if atty::is(Stream::Stdin) {
-        repo::list_from_fs(&filter, &base_dir)
-    } else {
+    let paths_from_stdin = !atty::is(Stream::Stdin);
+
+    let repos = if paths_from_stdin {
         let stdin = io::stdin();
+
         let paths = stdin
             .lock()
             .lines()
@@ -109,11 +110,18 @@ fn main() {
             .collect();
 
         repo::list_from_vec(&filter, &base_dir, paths)
+    } else {
+        repo::list_from_fs(&filter, &base_dir)
     };
+
+    let show_absolute_paths = opts.flag_absolute || paths_from_stdin;
 
     if opts.cmd_ls {
         for repo in &repos {
-            println!("{}", repo.get_path(&base_dir, opts.flag_absolute).display());
+            println!(
+                "{}",
+                repo.get_path(&base_dir, show_absolute_paths).display()
+            );
         }
     }
 
@@ -133,7 +141,7 @@ fn main() {
                 println!(
                     "== {} ==",
                     Yellow.bold().paint(
-                        repo.get_path(&base_dir, opts.flag_absolute)
+                        repo.get_path(&base_dir, show_absolute_paths)
                             .display()
                             .to_string()
                     )

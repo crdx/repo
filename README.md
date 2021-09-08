@@ -7,10 +7,10 @@
 ```
 Usage:
     repo [options] ls
-    repo [options] run [ -- ] <command>...
+    repo [options] run [--] <command>...
 
-Find git repository paths starting from the current directory,
-or from stdin if supplied.
+Find git repository paths starting from the current directory, or from stdin if supplied.
+Paths from stdin are always displayed as absolute paths.
 
 Options:
     -d, --dirty          Include only dirty repositories
