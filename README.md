@@ -1,6 +1,6 @@
 # repo
 
-**repo** is a tool that recursively finds git repositories.
+**repo** is a tool that recursively finds git repositories on a filesystem. It can include only repositories matching certain state (dirty, unpushed) and exclude any that match patterns defined in a configuration file. The two modes of operation are to list paths (`ls`) or execute (`run`) commands in the context of the repository.
 
 ## CLI
 
