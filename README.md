@@ -46,7 +46,7 @@ repo -vu run git push
 Check the status of all repositories.
 
 ```bash
-repo -v run git status -sb
+repo -v run -- git status -sb
 ```
 
 Run fsck on all repositories.
