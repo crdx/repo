@@ -91,7 +91,7 @@ The binary can be found in `target/release`.
 
 When benchmarked the [git2](https://docs.rs/git2) crate performed worse than spawning git processes to do the same job. Yes, this disappointed me too.
 
-## Bugs or contributions
+## Contributions
 
 Open an [issue](https://github.com/crdx/repo/issues) or send a [pull request](https://github.com/crdx/repo/pulls).
 
