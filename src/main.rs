@@ -85,7 +85,6 @@ pub struct Opts {
     flag_verbose: bool,
     flag_interactive: bool,
     flag_ignore_errors: bool,
-    flag_help: bool,
 }
 
 fn main() {
