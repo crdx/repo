@@ -8,4 +8,4 @@
 # generate shell completions
 @generate-completions: build
     mkdir -p completions
-    generate-completions target/release/repo --namespace '' > completions/repo.bash
+    docopt-compgen target/release/repo --namespace '' > completions/repo.bash
