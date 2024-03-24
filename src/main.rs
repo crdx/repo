@@ -50,7 +50,6 @@ fn usage() -> String {
             -v, --verbose        Show a header for each repository when executing a command
             -i, --interactive    Pause between command executions
             --ignore-errors      Ignore errors when executing commands
-            -h, --help           Show help
         ",
         get_program_name().unwrap()
     );

@@ -6,7 +6,7 @@ function __repo {
     cur="${COMP_WORDS[COMP_CWORD]}"
 
     if [ "$COMP_CWORD" -eq 1 ]; then
-        COMPREPLY=($(compgen -W '--dirty --unpushed --all --absolute --verbose --interactive --ignore-errors --help ls run' -- "$cur"))
+        COMPREPLY=($(compgen -W '--dirty --unpushed --all --absolute --verbose --interactive --ignore-errors ls run' -- "$cur"))
     else
         case ${COMP_WORDS[1]} in
             ls) __repo_ls ;;
@@ -20,7 +20,7 @@ function __repo_ls {
     cur="${COMP_WORDS[COMP_CWORD]}"
 
     if [ "$COMP_CWORD" -ge 2 ]; then
-        COMPREPLY=($(compgen -W '--dirty --unpushed --all --absolute --verbose --interactive --ignore-errors --help' -- "$cur"))
+        COMPREPLY=($(compgen -W '--dirty --unpushed --all --absolute --verbose --interactive --ignore-errors' -- "$cur"))
     fi
 }
 
@@ -29,7 +29,7 @@ function __repo_run {
     cur="${COMP_WORDS[COMP_CWORD]}"
 
     if [ "$COMP_CWORD" -eq 2 ]; then
-        COMPREPLY=($(compgen -W '--dirty --unpushed --all --absolute --verbose --interactive --ignore-errors --help --' -- "$cur"))
+        COMPREPLY=($(compgen -W '--dirty --unpushed --all --absolute --verbose --interactive --ignore-errors --' -- "$cur"))
     else
         case ${COMP_WORDS[2]} in
             --) __repo_run_-- ;;
@@ -42,7 +42,7 @@ function __repo_run_-- {
     cur="${COMP_WORDS[COMP_CWORD]}"
 
     if [ "$COMP_CWORD" -ge 3 ]; then
-        COMPREPLY=($(compgen -W '--dirty --unpushed --all --absolute --verbose --interactive --ignore-errors --help' -- "$cur"))
+        COMPREPLY=($(compgen -W '--dirty --unpushed --all --absolute --verbose --interactive --ignore-errors' -- "$cur"))
     fi
 }
 
