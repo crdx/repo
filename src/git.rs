@@ -32,6 +32,7 @@ fn stdout(path: &Path, args: &[&str]) -> Vec<u8> {
     Command::new("git")
         .arg("-C")
         .arg(path)
+        .arg("--no-optional-locks")
         .args(args)
         .output()
         .unwrap()
