@@ -1,4 +1,5 @@
 set quiet := true
+set shell := ["bash", "-cu", "-o", "pipefail"]
 
 [private]
 help:
@@ -12,5 +13,5 @@ generate-completions: build
     docopt-compgen target/release/repo --namespace '' > completions/repo.bash
 
 fmt:
-    just --fmt
-    find . -name '*.just' -print0 | xargs -0 -I{} just --fmt -f {}
+    echo 'Nothing to format'
+
