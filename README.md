@@ -64,7 +64,7 @@ repo run -- bash -c 'find .git/ -type f | wc -l' | paste -sd+ | bc
 
 ## Ignore patterns
 
-If a config file containing [gitignore patterns](https://git-scm.com/docs/gitignore) exists at `$HOME/.config/repo/ignore` then absolute repository paths will be matched against this file using the high-performance [ignore](https://docs.rs/ignore) crate.
+If a config file containing [gitignore patterns](https://git-scm.com/docs/gitignore) exists at `$HOME/.config/org.crdx/repo/ignore` then absolute repository paths will be matched against this file using the high-performance [ignore](https://docs.rs/ignore) crate.
 
 As absolute repository paths are used to match against the ignore rules the ignore pattern file should be written as though its root is `/`, the root of the filesystem. This means that if the pattern contains a `/` then it must be either absolute or prefixed with a `**/` to match.
 

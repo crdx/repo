@@ -7,8 +7,15 @@ pub fn get_ignorer(all: bool) -> Ignorer {
     if all {
         Ignorer::noop()
     } else {
-        let mut path = PathBuf::from(env::var_os("HOME").unwrap());
-        path.push(".config/repo/ignore");
-        Ignorer::new(path)
+        let home = PathBuf::from(env::var_os("HOME").unwrap());
+
+        let base = home.join(".config/org.crdx/repo");
+        let base = if base.exists() {
+            base
+        } else {
+            home.join(".config/repo")
+        };
+
+        Ignorer::new(base.join("ignore"))
     }
 }
