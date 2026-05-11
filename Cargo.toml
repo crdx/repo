@@ -13,5 +13,8 @@ rayon = "1.5.1"
 atty = "0.2.14"
 ignore = "0.4.18"
 
+[dev-dependencies]
+tempfile = "3"
+
 [profile.dev]
 debug = false

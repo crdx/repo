@@ -98,21 +98,25 @@ fn main() {
 
     let paths_from_stdin = !atty::is(Stream::Stdin);
 
-    let repos = if paths_from_stdin {
+    let (repos, used_stdin) = if paths_from_stdin {
         let stdin = io::stdin();
 
-        let paths = stdin
+        let paths: Vec<PathBuf> = stdin
             .lock()
             .lines()
             .map(|line| PathBuf::from(line.unwrap()))
             .collect();
 
-        repo::list_from_vec(&filter, &base_dir, paths)
+        if paths.is_empty() {
+            (repo::list_from_fs(&filter, &base_dir), false)
+        } else {
+            (repo::list_from_vec(&filter, &base_dir, paths), true)
+        }
     } else {
-        repo::list_from_fs(&filter, &base_dir)
+        (repo::list_from_fs(&filter, &base_dir), false)
     };
 
-    let show_absolute_paths = opts.flag_absolute || paths_from_stdin;
+    let show_absolute_paths = opts.flag_absolute || used_stdin;
 
     if opts.cmd_ls {
         for repo in &repos {
