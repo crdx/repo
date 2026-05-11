@@ -1,0 +1,9 @@
+#!/bin/bash
+set -euo pipefail
+
+NEW_VERSION=$1
+
+sed -i "s/^version = \"[^\"]*\"/version = \"$NEW_VERSION\"/" Cargo.toml
+cargo generate-lockfile
+git add Cargo.toml Cargo.lock CHANGELOG.md
+git commit -m "Release v$NEW_VERSION"
