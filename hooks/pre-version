@@ -5,5 +5,11 @@ NEW_VERSION=$1
 
 sed -i "s/^version = \"[^\"]*\"/version = \"$NEW_VERSION\"/" Cargo.toml
 cargo generate-lockfile
+
 git add Cargo.toml Cargo.lock CHANGELOG.md
-git commit -m "Release v$NEW_VERSION"
+
+if git diff --cached --quiet; then
+    echo "Nothing to commit (files already committed)."
+else
+    git commit -m "v${NEW_VERSION}"
+fi

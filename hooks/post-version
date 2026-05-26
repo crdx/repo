@@ -1,5 +1,4 @@
 #!/bin/bash
 set -euo pipefail
 
-git push
-git push --tags
+just release::push "v$1"

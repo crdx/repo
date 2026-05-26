@@ -73,11 +73,13 @@ jobs:
               with:
                   merge-multiple: true
 
+            - name: Install just
+              run: curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash -s -- --tag 1.50.0 --to /usr/local/bin
+
             - name: Extract changelog
               id: changelog
               run: |
-                  VERSION="${GITHUB_REF_NAME#v}"
-                  BODY=$(awk "/^## \[${VERSION}\]/{found=1; next} /^## \[/{if(found) exit} found{print}" CHANGELOG.md)
+                  BODY=$(just release::notes "${GITHUB_REF_NAME}")
                   {
                       echo "body<<EOF"
                       echo "$BODY"
@@ -87,7 +89,7 @@ jobs:
             - name: Create release
               run: |
                   TAG="${GITHUB_REF#refs/tags/}"
-                  gh release create "$TAG" *.tar.gz *.zip --title "$TAG" --notes "$BODY"
+                  gh release create "$TAG" *.tar.gz *.zip --title "$TAG" --notes "$BODY" --latest
               env:
                   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   BODY: ${{ steps.changelog.outputs.body }}
